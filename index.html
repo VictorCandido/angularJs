@@ -4,8 +4,7 @@
     <title>Lista Telefonica</title>
     <link rel="stylesheet" href="lib/bootstrap/bootstrap.min.css">
     
-    
-    <script src="lib/bootstrap/bootstrap.min.js"></script>
+    <!-- <script src="lib/bootstrap/bootstrap.min.js"></script> -->
     <script src="lib/angular/angular.js"></script>
 
     <style>
@@ -39,6 +38,14 @@
                 </tr>
             </tbody>
         </table>
+
+        <hr>
+
+        <div>
+            <input type="text" class="form-control" ng-model="contato.nome">
+            <input type="text" class="form-control" ng-model="contato.telefone">
+            <button class="btn btn-primary btn-block" ng-click="adicionarContato(contato)">Adicionar Contato</button>
+        </div>
     </div>
 
     <script>
@@ -51,6 +58,11 @@
                 { nome: "Ana", telefone: "12344321" },
                 { nome: "Maria", telefone: "11223344" }
             ]
+
+            $scope.adicionarContato = function(contato) {
+                $scope.contatos.push(contato);
+                delete $scope.contato;
+            }
         });
     </script>
 </body>
