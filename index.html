@@ -1,20 +1,57 @@
 <!DOCTYPE html>
-<html ng-app="helloWorld" >
+<html ng-app="listaTelefonica" >
 <head>
-    <title>AngularJs</title>
-    <script src="angular.js"></script>
+    <title>Lista Telefonica</title>
+    <link rel="stylesheet" href="lib/bootstrap/bootstrap.min.css">
+    
+    
+    <script src="lib/bootstrap/bootstrap.min.js"></script>
+    <script src="lib/angular/angular.js"></script>
+
+    <style>
+        .jumbotron {
+            width: 400px;
+            text-align: center;
+            margin-top: 20px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        table {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body ng-controller="listaTelefonicaCtrl">
+    <div class="jumbotron">
+        <h3>{{app}}</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Telefone</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr ng-repeat="contato in contatos">
+                    <td>{{ contato.nome }}</td>
+                    <td>{{ contato.telefone }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
     <script>
-        angular.module('helloWorld', []);
+        angular.module('listaTelefonica', []);
 
-        angular.module('helloWorld').controller('helloWorldController', function($scope) {
-            $scope.message = "Hello World!";
+        angular.module('listaTelefonica').controller('listaTelefonicaCtrl', function($scope) {
+            $scope.app = "Lista Telefonica"
+            $scope.contatos = [
+                { nome: "Pedro", telefone: "99998888" },
+                { nome: "Ana", telefone: "12344321" },
+                { nome: "Maria", telefone: "11223344" }
+            ]
         });
     </script>
-</head>
-<body>
-    <div ng-controller="helloWorldController">
-        {{ message }}
-    </div>
 </body>
 </html>
