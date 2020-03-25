@@ -18,6 +18,12 @@
         table {
             margin-top: 20px;
         }
+        .selecionado {
+            background-color: yellow !important;
+        }
+        .negrito {
+            font-weight: bold;
+        }
     </style>
 </head>
 <body ng-controller="listaTelefonicaCtrl">
@@ -26,6 +32,7 @@
         <table class="table table-striped">
             <thead>
                 <tr>
+                    <th></th>
                     <th>Nome</th>
                     <th>Telefone</th>
                     <th>Operadora</th>
@@ -33,7 +40,8 @@
             </thead>
 
             <tbody>
-                <tr ng-repeat="contato in contatos">
+                <tr ng-class="{ 'selecionado negrito': contato.selecionado }" ng-repeat="contato in contatos">
+                    <td><input type="checkbox" ng-model="contato.selecionado"></td>
                     <td>{{ contato.nome }}</td>
                     <td>{{ contato.telefone }}</td>
                     <td>{{ contato.operadora.nome }}</td>
