@@ -60,6 +60,7 @@
             </select>
 
             <button class="btn btn-primary btn-block" ng-click="adicionarContato(contato)" ng-disabled="!contato.nome || !contato.telefone || !contato.operadora">Adicionar Contato</button>
+            <button class="btn btn-danger btn-block" ng-click="apagarContatos(contatos)" ng-disabled="!isContatoSelecionado(contatos)">Apagar Contato</button>
         </div>
     </div>
 
@@ -85,6 +86,16 @@
             $scope.adicionarContato = function(contato) {
                 $scope.contatos.push(contato);
                 delete $scope.contato;
+            }
+
+            $scope.apagarContatos = (contatos) => {
+                $scope.contatos =  contatosSelecionados = contatos.filter(contato => {
+                    if (!contato.selecionado) return contato;
+                });
+            }
+
+            $scope.isContatoSelecionado = (contatos) => {
+                return contatos.find(contato => contato.selecionado);
             }
         });
     </script>
