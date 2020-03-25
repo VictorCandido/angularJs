@@ -36,6 +36,7 @@
                     <th>Nome</th>
                     <th>Telefone</th>
                     <th>Operadora</th>
+                    <th></th>
                 </tr>
             </thead>
 
@@ -45,6 +46,9 @@
                     <td>{{ contato.nome }}</td>
                     <td>{{ contato.telefone }}</td>
                     <td>{{ contato.operadora.nome }}</td>
+                    <td>
+                        <div style="width: 20px; height: 20px;" ng-style="{ 'background-color': contato.cor }"></div>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -70,9 +74,9 @@
         angular.module('listaTelefonica').controller('listaTelefonicaCtrl', function($scope) {
             $scope.app = "Lista Telefonica"
             $scope.contatos = [
-                { nome: "Pedro", telefone: "99998888" },
-                { nome: "Ana", telefone: "12344321" },
-                { nome: "Maria", telefone: "11223344" }
+                { nome: "Pedro", telefone: "99998888", cor: 'blue' },
+                { nome: "Ana", telefone: "12344321", cor: 'yellow' },
+                { nome: "Maria", telefone: "11223344", cor: 'red' }
             ]
 
             $scope.operadoras = [
