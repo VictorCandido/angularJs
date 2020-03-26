@@ -44,9 +44,9 @@
             </thead>
 
             <tbody>
-                <tr ng-class="{ 'selecionado negrito': contato.selecionado }" ng-repeat="contato in contatos | filter: criterioDeBusca | orderBy: criterioOrdenacao: direcaoOrdenacao">
+                <tr ng-class="{ 'selecionado negrito': contato.selecionado }" ng-repeat="contato in contatos | limitTo: 2 | filter: criterioDeBusca | orderBy: criterioOrdenacao: direcaoOrdenacao">
                     <td><input type="checkbox" ng-model="contato.selecionado"></td>
-                    <td>{{ contato.nome | uppercase }}</td>
+                    <td>{{ contato.nome | uppercase | limitTo: 3 }}</td>
                     <td>{{ contato.telefone }}</td>
                     <td>{{ contato.operadora.nome | lowercase }}</td>
                     <td>{{ contato.data | date:'EEE dd/MM/yyyy HH:mm' }}</td>
