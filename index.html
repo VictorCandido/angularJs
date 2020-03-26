@@ -9,7 +9,7 @@
 
     <style>
         .jumbotron {
-            width: 400px;
+            width: 800px;
             text-align: center;
             margin-top: 20px;
             margin-left: auto;
@@ -36,6 +36,7 @@
                     <th>Nome</th>
                     <th>Telefone</th>
                     <th>Operadora</th>
+                    <th>Data</th>
                     <th></th>
                 </tr>
             </thead>
@@ -43,9 +44,10 @@
             <tbody>
                 <tr ng-class="{ 'selecionado negrito': contato.selecionado }" ng-repeat="contato in contatos">
                     <td><input type="checkbox" ng-model="contato.selecionado"></td>
-                    <td>{{ contato.nome }}</td>
+                    <td>{{ contato.nome | uppercase }}</td>
                     <td>{{ contato.telefone }}</td>
-                    <td>{{ contato.operadora.nome }}</td>
+                    <td>{{ contato.operadora.nome | lowercase }}</td>
+                    <td>{{ contato.data | date:'dd/MM/yyyy HH:mm' }}</td>
                     <td>
                         <div style="width: 20px; height: 20px;" ng-style="{ 'background-color': contato.cor }"></div>
                     </td>
@@ -113,9 +115,9 @@
         angular.module('listaTelefonica').controller('listaTelefonicaCtrl', function($scope) {
             $scope.app = "Lista Telefonica"
             $scope.contatos = [
-                { nome: "Pedro", telefone: "99998888", cor: 'blue' },
-                { nome: "Ana", telefone: "12344321", cor: 'yellow' },
-                { nome: "Maria", telefone: "11223344", cor: 'red' }
+                { nome: "Pedro", telefone: "99998888", data: new Date(), operadora: { nome: 'Oi', codigo: 14, categoria: 'celular' }, cor: 'blue' },
+                { nome: "Ana", telefone: "12344321", data: new Date(), operadora: { nome: 'Vivo', codigo: 15, categoria: 'celular' }, cor: 'yellow' },
+                { nome: "Maria", telefone: "11223344", data: new Date(), operadora: { nome: 'Tim', codigo: 41, categoria: 'celular' }, cor: 'red' }
             ]
 
             $scope.operadoras = [
