@@ -43,7 +43,7 @@
             </thead>
 
             <tbody>
-                <tr ng-class="{ 'selecionado negrito': contato.selecionado }" ng-repeat="contato in contatos | filter: { nome: criterioDeBusca }">
+                <tr ng-class="{ 'selecionado negrito': contato.selecionado }" ng-repeat="contato in contatos | filter: criterioDeBusca | orderBy: 'nome': true">
                     <td><input type="checkbox" ng-model="contato.selecionado"></td>
                     <td>{{ contato.nome | uppercase }}</td>
                     <td>{{ contato.telefone }}</td>
