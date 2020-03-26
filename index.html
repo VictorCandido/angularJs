@@ -56,15 +56,42 @@
         <hr>
 
         <div>
-            <input type="text" class="form-control" ng-model="contato.nome">
-            <input type="text" class="form-control" ng-model="contato.telefone">
+            <form name="contatoForm">
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <input type="text" class="form-control" ng-model="contato.nome" name="nome" ng-required="true">
+                    </div>    
+                        
+                    <div class="form-group col-md-12">
+                        <input type="text" class="form-control" ng-model="contato.telefone" name="telefone" ng-required="true">
+                    </div>
 
-            <select ng-model="contato.operadora" ng-options="operadora.nome group by operadora.categoria for operadora in operadoras" class="form-control">
-                <option value="">Selecione uma operadora</option>
-            </select>
+                    <div class="form-group col-md-12">
+                        <select ng-model="contato.operadora" name="operadora" ng-required="true" ng-options="operadora.nome group by operadora.categoria for operadora in operadoras" class="form-control">
+                            <option value="">Selecione uma operadora</option>
+                        </select>
+                    </div>
+                </div>
 
-            <button class="btn btn-primary btn-block" ng-click="adicionarContato(contato)" ng-disabled="!contato.nome || !contato.telefone || !contato.operadora">Adicionar Contato</button>
-            <button class="btn btn-danger btn-block" ng-click="apagarContatos(contatos)" ng-hide="!isContatoSelecionado(contatos)">Apagar Contato</button>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <div ng-show="contatoForm.nome.$invalid" class="alert alert-danger">
+                            Por favor, preencha o campo nome!
+                        </div>
+            
+                        <div ng-show="contatoForm.telefone.$invalid" class="alert alert-danger">
+                            Por favor, preencha o campo telefone!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <button class="btn btn-primary btn-block" ng-click="adicionarContato(contato)" ng-disabled="contatoForm.$invalid">Adicionar Contato</button>
+                        <button class="btn btn-danger btn-block" ng-click="apagarContatos(contatos)" ng-hide="!isContatoSelecionado(contatos)">Apagar Contato</button>
+                    </div>
+                </div>
+            </form>
         </div>
 
         
