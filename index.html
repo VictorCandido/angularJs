@@ -6,6 +6,7 @@
     
     <!-- <script src="lib/bootstrap/bootstrap.min.js"></script> -->
     <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular/angular-locale_pt-br.js"></script>
 
     <style>
         .jumbotron {
@@ -70,7 +71,7 @@
                     </div>
 
                     <div class="form-group col-md-12">
-                        <select ng-model="contato.operadora" name="operadora" ng-required="true" ng-options="operadora.nome group by operadora.categoria for operadora in operadoras | orderBy: 'nome'" class="form-control">
+                        <select ng-model="contato.operadora" name="operadora" ng-required="true" ng-options="operadora.nome + ' (' + (operadora.preco | currency) + ')' group by operadora.categoria for operadora in operadoras | orderBy: 'nome'" class="form-control">
                             <option value="">Selecione uma operadora</option>
                         </select>
                     </div>
@@ -122,11 +123,11 @@
             ]
 
             $scope.operadoras = [
-                { nome: 'Oi', codigo: 14, categoria: 'celular' },
-                { nome: 'Vivo', codigo: 15, categoria: 'celular' },
-                { nome: 'Tim', codigo: 41, categoria: 'celular' },
-                { nome: 'GVT', codigo: 25, categoria: 'fixo' },
-                { nome: 'Embratel', codigo: 21, categoria: 'fixo' },
+                { nome: 'Oi', codigo: 14, categoria: 'celular', preco: 2 },
+                { nome: 'Vivo', codigo: 15, categoria: 'celular', preco: 1 },
+                { nome: 'Tim', codigo: 41, categoria: 'celular', preco: 3 },
+                { nome: 'GVT', codigo: 25, categoria: 'fixo', preco: 1 },
+                { nome: 'Embratel', codigo: 21, categoria: 'fixo', preco: 2 },
             ]
 
             $scope.adicionarContato = function(contato) {
