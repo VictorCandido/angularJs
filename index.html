@@ -59,7 +59,7 @@
             <form name="contatoForm">
                 <div class="row">
                     <div class="form-group col-md-12">
-                        <input type="text" class="form-control" ng-model="contato.nome" name="nome" ng-required="true">
+                        <input type="text" class="form-control" ng-model="contato.nome" name="nome" ng-required="true" ng-minlength="10">
                     </div>    
                         
                     <div class="form-group col-md-12">
@@ -75,11 +75,15 @@
 
                 <div class="row">
                     <div class="form-group col-md-12">
-                        <div ng-show="contatoForm.nome.$invalid && contatoForm.nome.$dirty" class="alert alert-danger">
+                        <div ng-show="contatoForm.nome.$error.required && contatoForm.nome.$dirty" class="alert alert-danger">
                             Por favor, preencha o campo nome!
                         </div>
+
+                        <div ng-show="contatoForm.nome.$error.minlength" class="alert alert-danger">
+                            Campo nome deve ter no mínimo 10 caracteres.
+                        </div>
             
-                        <div ng-show="contatoForm.telefone.$invalid && contatoForm.telefone.$dirty" class="alert alert-danger">
+                        <div ng-show="contatoForm.telefone.$error.invalid && contatoForm.telefone.$dirty" class="alert alert-danger">
                             Por favor, preencha o campo telefone!
                         </div>
                     </div>
