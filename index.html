@@ -34,8 +34,8 @@
             <thead>
                 <tr>
                     <th></th>
-                    <th>Nome</th>
-                    <th>Telefone</th>
+                    <th><a ng-click="ordernarPor('nome')">Nome</a></th>
+                    <th><a ng-click="ordernarPor('telefone')">Telefone</a></th>
                     <th>Operadora</th>
                     <th>Data</th>
                     <th></th>
@@ -43,7 +43,7 @@
             </thead>
 
             <tbody>
-                <tr ng-class="{ 'selecionado negrito': contato.selecionado }" ng-repeat="contato in contatos | filter: criterioDeBusca | orderBy: 'nome': true">
+                <tr ng-class="{ 'selecionado negrito': contato.selecionado }" ng-repeat="contato in contatos | filter: criterioDeBusca | orderBy: criterioOrdenacao: direcaoOrdenacao">
                     <td><input type="checkbox" ng-model="contato.selecionado"></td>
                     <td>{{ contato.nome | uppercase }}</td>
                     <td>{{ contato.telefone }}</td>
@@ -70,7 +70,7 @@
                     </div>
 
                     <div class="form-group col-md-12">
-                        <select ng-model="contato.operadora" name="operadora" ng-required="true" ng-options="operadora.nome group by operadora.categoria for operadora in operadoras" class="form-control">
+                        <select ng-model="contato.operadora" name="operadora" ng-required="true" ng-options="operadora.nome group by operadora.categoria for operadora in operadoras | orderBy: 'nome'" class="form-control">
                             <option value="">Selecione uma operadora</option>
                         </select>
                     </div>
@@ -143,6 +143,11 @@
 
             $scope.isContatoSelecionado = (contatos) => {
                 return contatos.find(contato => contato.selecionado);
+            }
+
+            $scope.ordernarPor = (campo) => {
+                $scope.criterioOrdenacao = campo;
+                $scope.direcaoOrdenacao = !$scope.direcaoOrdenacao
             }
         });
     </script>
