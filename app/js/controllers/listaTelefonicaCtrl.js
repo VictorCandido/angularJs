@@ -1,4 +1,4 @@
-angular.module('listaTelefonica').controller('listaTelefonicaCtrl', function($scope, $http) {
+angular.module('listaTelefonica').controller('listaTelefonicaCtrl', function($scope, $http, contatosAPI) {
     $scope.app = "Lista Telefonica"
     $scope.contatos = []
 
@@ -7,7 +7,7 @@ angular.module('listaTelefonica').controller('listaTelefonicaCtrl', function($sc
     $scope.adicionarContato = function(contato) {
         // $scope.contatos.push(contato);
         console.log(contato)
-        $http.post('http://localhost:3000/contatos', contato).then(res => {
+        contatosAPI.saveContato(contato).then(res => {
             delete $scope.contato;
             $scope.contatoForm.$setPristine();
             carregarContatos()
@@ -30,7 +30,7 @@ angular.module('listaTelefonica').controller('listaTelefonicaCtrl', function($sc
     }
 
     const carregarContatos = () => {
-        $http.get('http://localhost:3000/contatos').then(res => {
+        contatosAPI.getContatos().then(res => {
             $scope.contatos = res.data
         });
     }
