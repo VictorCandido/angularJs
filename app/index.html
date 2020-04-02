@@ -2,30 +2,14 @@
 <html ng-app="listaTelefonica" >
 <head>
     <title>Lista Telefonica</title>
+    <link rel="stylesheet" href="css/app.css">
     <link rel="stylesheet" href="lib/bootstrap/bootstrap.min.css">
     
     <!-- <script src="lib/bootstrap/bootstrap.min.js"></script> -->
     <script src="lib/angular/angular.js"></script>
     <script src="lib/angular/angular-locale_pt-br.js"></script>
-
-    <style>
-        .jumbotron {
-            width: 800px;
-            text-align: center;
-            margin-top: 20px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        table {
-            margin-top: 20px;
-        }
-        .selecionado {
-            background-color: yellow !important;
-        }
-        .negrito {
-            font-weight: bold;
-        }
-    </style>
+    <script src="js/app.js"></script>
+    <script src="js/controllers/listaTelefonicaCtrl.js"></script>
 </head>
 <body ng-controller="listaTelefonicaCtrl">
     <div class="jumbotron">
@@ -109,56 +93,6 @@
         
     </div>
 
-    <div ng-include="'footer.html'"></div>
-
-    <script>
-        angular.module('listaTelefonica', []);
-
-        angular.module('listaTelefonica').controller('listaTelefonicaCtrl', function($scope, $http) {
-            $scope.app = "Lista Telefonica"
-            $scope.contatos = []
-
-            $scope.operadoras = []
-
-            $scope.adicionarContato = function(contato) {
-                // $scope.contatos.push(contato);
-                console.log(contato)
-                $http.post('http://localhost:3000/contatos', contato).then(res => {
-                    delete $scope.contato;
-                    $scope.contatoForm.$setPristine();
-                })
-            }
-
-            $scope.apagarContatos = (contatos) => {
-                $scope.contatos =  contatosSelecionados = contatos.filter(contato => {
-                    if (!contato.selecionado) return contato;
-                });
-            }
-
-            $scope.isContatoSelecionado = (contatos) => {
-                return contatos.find(contato => contato.selecionado);
-            }
-
-            $scope.ordernarPor = (campo) => {
-                $scope.criterioOrdenacao = campo;
-                $scope.direcaoOrdenacao = !$scope.direcaoOrdenacao
-            }
-
-            const carregarContatos = () => {
-                $http.get('http://localhost:3000/contatos').then(res => {
-                    $scope.contatos = res.data
-                });
-            }
-
-            const carregarOperadoras = () => {
-                $http.get('http://localhost:3000/operadoras').then(res => {
-                    $scope.operadoras = res.data
-                });
-            }
-
-            carregarContatos()
-            carregarOperadoras()
-        });
-    </script>
+    <div ng-include="'view/footer.html'"></div>
 </body>
 </html>

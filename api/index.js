@@ -1,9 +1,13 @@
 const express = require('express');
+// const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const app = express();
+const router = express.Router();
 
 app.use(cors());
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
 var contatos = [
     { nome: "Pedro", telefone: "99998888", data: new Date(), operadora: { nome: 'Oi', codigo: 14, categoria: 'celular' }, cor: 'blue' },
@@ -19,20 +23,24 @@ var operadoras = [
     { nome: 'Embratel', codigo: 21, categoria: 'fixo', preco: 2 },
 ]
 
-app.get('/contatos', (req, res) => {
-    res.send(contatos)
-})
 
-app.post('/contatos', (req, res) => {
-    console.log(req.body)
+router.post('/contatos', (req, res) => {
     contatos.push(req.body)
 
     res.send({ message: 'ok' })
 })
 
-app.get('/operadoras', (req, res) => {
+router.get('/contatos', (req, res) => {
+    res.send(contatos)
+})
+
+
+
+router.get('/operadoras', (req, res) => {
     res.send(operadoras)
 })
+
+app.use('/', router);
 
 // app.post('/operadoras', (req, res) => {
 //     const { nome, codigo, categoria, preco } = req.body;
